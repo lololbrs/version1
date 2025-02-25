@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temps d'Attente aux Urgences</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #007bff;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        .dark-mode {
+            background-color: #263238;
+            color: white;
+        }
+        #time {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+            padding: 15px;
+        }
+        .advice-section {
+            text-align: left;
+            background: #e3f2fd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .advice-section h2 {
+            color: #007bff;
+        }
+        .advice-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .advice-section li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temps d'Attente aux Urgences</h1>
+        <p id="time">Temps d'attente actuel : <strong>Chargement...</strong></p>
+        <button class="button" onclick="updateTime()">Actualiser</button>
+        <button class="button" onclick="toggleDarkMode()">Mode Sombre</button>
+        
+        <div class="advice-section">
+            <h2>Conseils aux Patients</h2>
+            <ul>
+                <li>💡 Apportez vos documents médicaux et votre carte d'identité.</li>
+                <li>💊 Notez vos médicaments et vos allergies avant de venir.</li>
+                <li>🕒 Si votre état est non urgent, consultez votre médecin généraliste.</li>
+                <li>📞 Appelez le 15 en cas d'urgence vitale avant de vous déplacer.</li>
+                <li>😷 Portez un masque si vous avez des symptômes infectieux.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function updateTime() {
+            const waitTimes = ["15 minutes", "30 minutes", "45 minutes", "1 heure", "Indisponible"];
+            const randomTime = waitTimes[Math.floor(Math.random() * waitTimes.length)];
+            document.getElementById("time").innerHTML = `Temps d'attente actuel : <strong>${randomTime}</strong>`;
+        }
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        }
+        window.onload = function() {
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+            updateTime();
+            setInterval(updateTime, 15000);
+        };
+    </script>
+</body>
+</html>
